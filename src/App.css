@@ -19,6 +19,12 @@
   display: flex;
   align-items: flex-start;
 }
+
+.BtnBar {
+  display: flex;
+  flex-direction: row;
+}
+
 .GoBackBtn {
   margin-top: 40px;
   justify-self: left;
@@ -26,6 +32,13 @@
 
 .BackBtn {
   align-self: left;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 20px;
 }
 
 #Sprite {
@@ -90,6 +103,28 @@
 
 .Abilities {
   width: 50%;
+}
+
+@media (max-width: 1250px) {
+  .App,
+  .Status {
+    flex-direction: column;
+  }
+  .LeftPanel,
+  .RightPanel {
+    width: auto;
+  }
+  #Sprite {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .Abilities {
+    width: auto;
+    margin-top: 60px;
+  }
+  .TechItem {
+    width: 90%;
+  }
 }
 
 .Logo {

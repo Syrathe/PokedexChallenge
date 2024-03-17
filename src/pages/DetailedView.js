@@ -64,18 +64,18 @@ const DetailedView = () => {
           <span id="TypeText"></span>
         </h4>
         <div className="TechData">
-          <div>
+          <div className="TechItem">
             <strong>Number: {number}</strong>
           </div>
-          <div>
+          <div className="TechItem">
             <strong>
               Name: {toInitialMayusc(pokemon?.name ?? 'Loading...')}
             </strong>
           </div>
-          <div>
+          <div className="TechItem">
             <strong>Height: {pokemon.height}</strong>
           </div>
-          <div>
+          <div className="TechItem">
             <strong>Weight: {pokemon.weight}</strong>
           </div>
         </div>

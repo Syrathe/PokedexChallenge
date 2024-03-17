@@ -91,20 +91,26 @@ const Home = () => {
             </div>
           )
         })}
-        <button
-          onClick={() => {
-            dispatch(decreaseOffset())
-          }}
-        >
-          Previous
-        </button>
-        <button
-          onClick={() => {
-            dispatch(increaseOffset())
-          }}
-        >
-          Next
-        </button>
+        <div className="BtnBar">
+          <div className="wrapper">
+            <button
+              hidden={offset <= 0}
+              onClick={() => {
+                dispatch(decreaseOffset())
+              }}
+            >
+              Previous
+            </button>
+            <button
+              hidden={offset >= 140}
+              onClick={() => {
+                dispatch(increaseOffset())
+              }}
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )
