@@ -1,13 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setPokemonList } from '../features/PokemonList'
 import { increaseOffset, decreaseOffset } from '../features/Offset'
+import DetailedView from '../pages/DetailedView.js'
 import pokemonproject from '../assets/pokemonproject.png'
 import pokeball from '../assets/pokeballSprite.png'
 
 const Home = () => {
   let sprite
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const pokemonList = useSelector((state) => state.pokemonList.value)
   const offset = useSelector((state) => state.offset.value)
@@ -60,6 +63,12 @@ const Home = () => {
     }
   }
 
+  function handleDoubleClick(url) {
+    const regex = /\/(\d+)\/$/
+    const match = url.match(regex)
+    navigate('/details', { state: { number: match[1] } })
+  }
+
   return (
     <div className="App">
       <div className="LeftPanel" id="left">
@@ -75,7 +84,7 @@ const Home = () => {
               className="pokemonNameDiv"
               key={index}
               onClick={() => updatePortrait(pokemon.url)}
-              onDoubleClick={() => {}}
+              onDoubleClick={() => handleDoubleClick(pokemon.url)}
             >
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
 
