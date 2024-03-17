@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setPokemonList } from '../features/PokemonList'
 import { increaseOffset, decreaseOffset } from '../features/Offset'
-import DetailedView from '../pages/DetailedView.js'
 import pokemonproject from '../assets/pokemonproject.png'
 import pokeball from '../assets/pokeballSprite.png'
 
