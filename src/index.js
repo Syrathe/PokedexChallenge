@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import pokemonListReducer from './features/PokemonList.js'
+import offsetReducer from './features/Offset.js'
 //React Router
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
@@ -16,8 +17,10 @@ import NotFound from './pages/NotFound'
 const store = configureStore({
   reducer: {
     pokemonList: pokemonListReducer,
+    offset: offsetReducer,
   },
 })
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 const router = createBrowserRouter([
   {
