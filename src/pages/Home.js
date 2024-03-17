@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setPokemonList } from '../features/PokemonList'
 import { increaseOffset, decreaseOffset } from '../features/Offset'
+import pokemonproject from '../assets/pokemonproject.png'
+import pokeball from '../assets/pokeballSprite.png'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -14,8 +16,8 @@ const Home = () => {
       fetch(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offset}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.results)
-          setPokemonList(data.results)
+          console.log(data.results, 'results')
+          dispatch(setPokemonList(data.results))
         })
         .catch((err) => {
           console.log(err.message)
@@ -24,8 +26,8 @@ const Home = () => {
       fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.results)
-          setPokemonList(data.results)
+          console.log(data.results, ' results')
+          dispatch(setPokemonList(data.results))
         })
         .catch((err) => {
           console.log(err.message)
@@ -34,8 +36,46 @@ const Home = () => {
   }, [offset])
 
   return (
-    <div>
-      Home, indeed.
+    <div className="App">
+      <div className="LeftPanel" id="left">
+        <img src={pokemonproject} className="Logo" alt="Pokemon Logo" />
+        <br />
+        <img src="" id="Sprite" />
+      </div>
+      <div className="RightPanel">
+        {pokemonList?.map(function (pokemon, index) {
+          console.log(pokemon, 'pokemon')
+          return (
+            <div
+              className="pokemonNameDiv"
+              key={index}
+              onClick={() => {}}
+              onDoubleClick={() => {}}
+            >
+              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+
+              <img src={pokeball} />
+            </div>
+          )
+        })}
+        <button
+          onClick={() => {
+            dispatch(decreaseOffset())
+          }}
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => {
+            dispatch(increaseOffset())
+          }}
+        >
+          Next
+        </button>
+      </div>
+    </div>
+
+    /* Home, indeed.
       <span></span>
       <button
         onClick={() => {
@@ -58,8 +98,7 @@ const Home = () => {
       >
         Decrease
       </button>
-      <span>{offset}</span>
-    </div>
+      <span>{offset}</span> */
   )
 }
 

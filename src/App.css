@@ -1,31 +1,114 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  padding: 120px;
+  background-color: lightgrey;
+  height: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.RightPanel {
+  width: 65%;
+  background-color: #fff;
+  padding-right: 12px;
+  padding-left: 12px;
+  padding-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.BtnContainer {
+  display: flex;
+  align-items: flex-start;
+}
+.GoBackBtn {
+  margin-top: 40px;
+  justify-self: left;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.BackBtn {
+  align-self: left;
+}
+
+#Sprite {
+  padding-top: 140px;
+  padding-bottom: 140px;
+  width: 200px;
+  height: 200px;
+}
+
+.LeftPanel {
+  width: 35%;
+  background-color: #fff;
+  flex-direction: column;
+}
+
+.TechData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 60px;
+}
+
+.Status {
+  display: flex;
+  flex-direction: row;
+}
+
+.Bars {
+  padding-top: 36px;
+}
+
+.Basic6 {
+  display: flex;
+  flex-direction: row;
+}
+
+.BaseStats {
+  width: 50%;
+  text-align: left;
+}
+
+.SingleStat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Empty {
+  width: 150px;
+  height: 20px;
+  background-color: lightslategray;
+  border-radius: 8px;
+  margin-left: 20px;
+  margin-bottom: 14px;
+}
+
+.Fill {
+  height: 20px;
+  background-color: red;
+  border-radius: 8px;
+}
+
+.Abilities {
+  width: 50%;
+}
+
+.Logo {
+  object-fit: cover;
+  width: 60%;
+  padding-top: 40px;
+}
+
+.pokemonNameDiv {
   display: flex;
   flex-direction: column;
+  width: auto;
+  margin-top: 20px;
+  padding: 4px 20px;
+  box-shadow: 2px 2px 2px 3px rgba(143, 143, 143, 0.25);
+  border-radius: 6px;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  justify-content: space-between;
 }
 
 @keyframes App-logo-spin {
