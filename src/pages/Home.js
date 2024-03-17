@@ -7,6 +7,7 @@ import pokemonproject from '../assets/pokemonproject.png'
 import pokeball from '../assets/pokeballSprite.png'
 
 const Home = () => {
+  let sprite
   const dispatch = useDispatch()
   const pokemonList = useSelector((state) => state.pokemonList.value)
   const offset = useSelector((state) => state.offset.value)
@@ -35,6 +36,30 @@ const Home = () => {
     }
   }, [offset])
 
+  useEffect(() => {
+    fetch('https://pokeapi.co/api/v2/pokemon-form/bulbasaur')
+      .then((response) => response.json())
+      .then((data) => {
+        sprite = data.sprites.front_default
+        document.getElementById('Sprite').src = sprite
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+  }, [])
+
+  function updatePortrait(url) {
+    const regex = /\/(\d+)\/$/
+    const match = url.match(regex)
+    const source = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${match[1]}.png`
+
+    if (match) {
+      document.getElementById('Sprite').src = source
+    } else {
+      alert('Number not found')
+    }
+  }
+
   return (
     <div className="App">
       <div className="LeftPanel" id="left">
@@ -49,7 +74,7 @@ const Home = () => {
             <div
               className="pokemonNameDiv"
               key={index}
-              onClick={() => {}}
+              onClick={() => updatePortrait(pokemon.url)}
               onDoubleClick={() => {}}
             >
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
@@ -74,31 +99,6 @@ const Home = () => {
         </button>
       </div>
     </div>
-
-    /* Home, indeed.
-      <span></span>
-      <button
-        onClick={() => {
-          dispatch(setPokemonList('Charmander'))
-        }}
-      >
-        Click
-      </button>
-      <button
-        onClick={() => {
-          dispatch(increaseOffset())
-        }}
-      >
-        Increase
-      </button>
-      <button
-        onClick={() => {
-          dispatch(decreaseOffset())
-        }}
-      >
-        Decrease
-      </button>
-      <span>{offset}</span> */
   )
 }
 
