@@ -9,6 +9,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import pokemonListReducer from './features/PokemonList.js'
 import offsetReducer from './features/Offset.js'
+import pokemonReducer from './features/Pokemon'
 //React Router
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
@@ -19,6 +20,8 @@ const store = configureStore({
   reducer: {
     pokemonList: pokemonListReducer,
     offset: offsetReducer,
+    pokemon: pokemonReducer,
+    number: pokemonReducer,
   },
 })
 

@@ -3,11 +3,10 @@ import { createSlice } from '@reduxjs/toolkit'
 export const pokemonListSlice = createSlice({
   name: 'pokemonlist',
   initialState: {
-    value: [{ name: 'bulbasaur' }, { name: 'ivysaur' }, { name: 'venusaur' }],
+    value: [],
   },
   reducers: {
     setPokemonList: (state, action) => {
-      //write code for setting pokemonList
       state.value = action.payload
     },
   },

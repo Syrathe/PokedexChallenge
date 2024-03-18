@@ -1,22 +1,22 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import pokemonproject from '../assets/pokemonproject.png'
+import { setPokemon } from '../features/Pokemon'
 
 const DetailedView = () => {
-  const location = useLocation()
   const navigate = useNavigate()
-  const number = location.state.number
+  const dispatch = useDispatch()
+  const number = useSelector((state) => state.pokemon.number)
   const source = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`
-  const [pokemon, setPokemon] = useState({ types: [] })
+  const pokemon = useSelector((state) => state.pokemon.pokemon)
 
   useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${number}/`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data, 'pokemon')
-        setPokemon(data)
-        document.getElementById('Sprite').src = source
+        dispatch(setPokemon(data))
         setWidth('Fill1', data.stats[0].base_stat)
         setWidth('Fill2', data.stats[1].base_stat)
         setWidth('Fill3', data.stats[2].base_stat)
@@ -41,7 +41,7 @@ const DetailedView = () => {
       <div className="LeftPanel" id="left">
         <img src={pokemonproject} className="Logo" alt="Pokemon Logo" />
         <br />
-        <img src="" id="Sprite" />
+        <img src={source} id="Sprite" />
       </div>
       <div className="RightPanel">
         <div className="BtnContainer">
@@ -54,29 +54,41 @@ const DetailedView = () => {
           </button>
         </div>
         <h4>
-          <p>Type:</p>
-          {pokemon?.types?.length
-            ? toInitialMayusc(pokemon?.types[0]?.type.name)
-            : 'Loading...'}
-          {pokemon?.types[1]
-            ? ' & ' + toInitialMayusc(pokemon?.types[1]?.type.name)
-            : ''}
-          <span id="TypeText"></span>
+          <p>
+            <strong>Type:</strong>
+          </p>
+          <p>
+            <strong>
+              {pokemon?.types?.length
+                ? toInitialMayusc(pokemon?.types[0]?.type.name)
+                : 'Loading...'}
+              {pokemon?.types[1]
+                ? ' & ' + toInitialMayusc(pokemon?.types[1]?.type.name)
+                : ''}
+            </strong>
+          </p>
         </h4>
         <div className="TechData">
-          <div className="TechItem">
-            <strong>Number: {number}</strong>
+          <div>
+            <strong>Number: {number ? number : 'Loading...'}</strong>
           </div>
-          <div className="TechItem">
+          <div>
             <strong>
-              Name: {toInitialMayusc(pokemon?.name ?? 'Loading...')}
+              Name:
+              {pokemon.name
+                ? ' ' + toInitialMayusc(pokemon.name)
+                : ' Loading...'}
             </strong>
           </div>
-          <div className="TechItem">
-            <strong>Height: {pokemon.height}</strong>
+          <div>
+            <strong>
+              Height: {pokemon.height ? pokemon.height : 'Loading...'}
+            </strong>
           </div>
-          <div className="TechItem">
-            <strong>Weight: {pokemon.weight}</strong>
+          <div>
+            <strong>
+              Weight: {pokemon.weight ? pokemon.weight : 'Loading...'}
+            </strong>
           </div>
         </div>
         <div className="Status">
@@ -155,9 +167,9 @@ const DetailedView = () => {
           </div>
           <div className="Abilities">
             <strong>Abilities:</strong>
-            {pokemon?.abilities?.map(function (ability) {
+            {pokemon?.abilities?.map(function (ability, index) {
               return (
-                <p>
+                <p key={index}>
                   <strong>{ability.ability.name}</strong>
                 </p>
               )

@@ -1,9 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setPokemonList } from '../features/PokemonList'
 import { increaseOffset, decreaseOffset } from '../features/Offset'
+import { setNumber } from '../features/Pokemon'
 import pokemonproject from '../assets/pokemonproject.png'
 import pokeball from '../assets/pokeballSprite.png'
 
@@ -19,7 +20,6 @@ const Home = () => {
       fetch(`https://pokeapi.co/api/v2/pokemon/?limit=10&offset=${offset}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.results, 'results')
           dispatch(setPokemonList(data.results))
         })
         .catch((err) => {
@@ -29,7 +29,6 @@ const Home = () => {
       fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.results, ' results')
           dispatch(setPokemonList(data.results))
         })
         .catch((err) => {
@@ -65,7 +64,8 @@ const Home = () => {
   function handleDoubleClick(url) {
     const regex = /\/(\d+)\/$/
     const match = url.match(regex)
-    navigate('/details', { state: { number: match[1] } })
+    dispatch(setNumber(match[1]))
+    navigate('/details')
   }
 
   return (
@@ -73,11 +73,10 @@ const Home = () => {
       <div className="LeftPanel" id="left">
         <img src={pokemonproject} className="Logo" alt="Pokemon Logo" />
         <br />
-        <img src="" id="Sprite" />
+        <img src="" id="Sprite" alt="pokemon sprite" />
       </div>
       <div className="RightPanel">
         {pokemonList?.map(function (pokemon, index) {
-          console.log(pokemon, 'pokemon')
           return (
             <div
               className="pokemonNameDiv"
@@ -87,7 +86,7 @@ const Home = () => {
             >
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
 
-              <img src={pokeball} />
+              <img src={pokeball} alt="pokeball" />
             </div>
           )
         })}
